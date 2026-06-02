@@ -1,52 +1,98 @@
 # PDF Information Extraction API
 
-A FastAPI-based application that extracts important information from PDF files.
+# AI-Powered PDF Information Extraction API
 
-This project supports:
+## Overview
 
-- Text PDFs
-- Scanned PDFs using OCR
-- Structured and unstructured PDFs
-- Keyword-based extraction
-- AI-based parsing using OpenAI
-- JSON output format
+This project is a FastAPI-based PDF Information Extraction API that processes both text-based and scanned PDF documents. It uses OCR and Generative AI to extract structured information and return the results in JSON format.
+
+The API supports multiple file upload methods including Form Data, Binary Upload, and Base64 Upload.
 
 ---
 
-# Features
+## Features
 
-## Rule-Based Extraction
-- Extract headings
-- Extract important details
-- Keyword-based searching
-- PDF text parsing
+* Extract text from text-based PDFs
+* OCR support for scanned PDFs
+* AI-powered document understanding using Gemini
+* Dynamic keyword-based information extraction
+* Structured JSON responses
+* Supports:
 
-## OCR Support
-- Supports scanned PDFs
-- Uses Tesseract OCR
-- Converts PDF pages into images
-
-## AI-Based Parsing
-- Uses OpenAI LLM
-- Dynamic keyword extraction
-- Intelligent document understanding
-- Structured JSON response
+  * Multipart/Form-Data Upload
+  * Raw Binary Upload
+  * Base64 Upload
+* Dockerized deployment
+* Postman and Swagger testing support
+* Cloud deployment using Render
 
 ---
 
-# Technologies Used
+## Project Architecture
 
-- Python
-- FastAPI
-- pdfplumber
-- pytesseract
-- pdf2image
-- OpenAI API
-- Postman
+```text
+Client
+│
+├── Form Data Upload
+├── Binary Upload
+└── Base64 Upload
+        │
+        ▼
+FastAPI Backend
+        │
+        ▼
+PDF Processing Layer
+        │
+        ├── pdfplumber (Text PDFs)
+        └── OCR Pipeline
+                │
+                ├── pdf2image
+                └── Tesseract OCR
+        │
+        ▼
+Gemini AI Processing
+        │
+        ▼
+Structured JSON Output
+```
 
 ---
 
-# Project Structure
+## Technologies Used
+
+### Backend
+
+* FastAPI
+* Uvicorn
+
+### PDF Processing
+
+* pdfplumber
+* pdf2image
+
+### OCR
+
+* Tesseract OCR
+* pytesseract
+* Poppler
+
+### AI
+
+* Google Gemini API
+
+### Deployment
+
+* Docker
+* Render
+
+### Testing
+
+* Postman
+* Swagger UI
+
+---
+
+## Project Structure
 
 ```text
 pdf-extraction-api/
@@ -56,51 +102,123 @@ pdf-extraction-api/
 │   └── services/
 │       ├── pdf_extractor.py
 │       ├── ocr_service.py
-│       └── parser.py
+│       ├── parser.py
+│       └── __init__.py
 │
 ├── uploads/
+│
+├── Dockerfile
 ├── requirements.txt
 ├── README.md
-├── .gitignore
-└── .env
+├── .env
+└── .gitignore
 ```
 
 ---
 
-# Installation
+## API Endpoints
 
-## Clone Repository
+### 1. Form Data Upload
+
+```http
+POST /parse-pdf
+```
+
+Accepts PDF files using multipart/form-data.
+
+---
+
+### 2. Binary Upload
+
+```http
+POST /parse-pdf-binary
+```
+
+Accepts raw PDF bytes directly in the request body.
+
+---
+
+### 3. Base64 Upload
+
+```http
+POST /parse-pdf-base64
+```
+
+Accepts Base64-encoded PDF content in JSON format.
+
+Example Request:
+
+```json
+{
+  "filename": "NALCO.pdf",
+  "pdf_data": "<BASE64_STRING>",
+  "keyword": "amount"
+}
+```
+
+---
+
+## OCR Workflow
+
+```text
+Scanned PDF
+      │
+      ▼
+pdf2image
+      │
+      ▼
+Images
+      │
+      ▼
+Tesseract OCR
+      │
+      ▼
+Extracted Text
+```
+
+---
+
+## AI Processing Workflow
+
+```text
+Extracted Text
+      │
+      ▼
+Gemini AI
+      │
+      ▼
+Keyword-Based Extraction
+      │
+      ▼
+Structured JSON Output
+```
+
+---
+
+## Installation
+
+### Clone Repository
 
 ```bash
-git clone YOUR_GITHUB_REPO_LINK
+git clone <repository-url>
 cd pdf-extraction-api
 ```
 
----
-
-## Create Virtual Environment
+### Create Virtual Environment
 
 ```bash
 python -m venv venv
 ```
 
-Activate environment:
+### Activate Environment
 
-### Windows
+Windows:
 
 ```bash
 venv\Scripts\activate
 ```
 
-### Mac/Linux
-
-```bash
-source venv/bin/activate
-```
-
----
-
-## Install Dependencies
+### Install Dependencies
 
 ```bash
 pip install -r requirements.txt
@@ -108,123 +226,80 @@ pip install -r requirements.txt
 
 ---
 
-# Environment Variables
+## Environment Variables
 
-Create a `.env` file and add:
+Create a `.env` file:
 
 ```env
-OPENAI_API_KEY=your_openai_api_key
+GEMINI_API_KEY=YOUR_API_KEY
 ```
 
 ---
 
-# Run the Application
+## Run Locally
 
 ```bash
 python -m uvicorn app.main:app --reload
 ```
 
-Application will run at:
+API:
 
 ```text
 http://127.0.0.1:8000
 ```
 
----
-
-# API Endpoints
-
-## Home Endpoint
-
-### GET `/`
-
-Returns API status.
-
----
-
-## Rule-Based PDF Parsing
-
-### POST `/parse-pdf`
-
-Extracts:
-- headings
-- important details
-- keyword matches
-
-### Form Data
-
-| Key | Type |
-|---|---|
-| file | File |
-| keyword | Text (optional) |
-
----
-
-## AI-Based PDF Parsing
-
-### POST `/parse-pdf-ai`
-
-Uses OpenAI LLM for intelligent extraction.
-
-### Form Data
-
-| Key | Type |
-|---|---|
-| file | File |
-| keyword | Text (optional) |
-
----
-
-# Testing with Postman
-
-## URL Example
+Swagger Documentation:
 
 ```text
-http://127.0.0.1:8000/parse-pdf
-```
-
-or deployed URL:
-
-```text
-https://your-api.onrender.com/parse-pdf
+http://127.0.0.1:8000/docs
 ```
 
 ---
 
-## Postman Setup
+## Deployment
 
-- Method: POST
-- Body → form-data
+The application is Dockerized and deployed on Render.
 
-### Fields
+Live API:
 
-| Key | Type |
-|---|---|
-| file | File |
-| keyword | Text |
+```text
+https://pdf-extraction-api-o2h7.onrender.com
+```
 
----
+Swagger Docs:
 
-# OCR Setup
-
-Install:
-- Tesseract OCR
-- Poppler
-
-Add paths in `ocr_service.py`.
+```text
+https://pdf-extraction-api-o2h7.onrender.com/docs
+```
 
 ---
 
-# Deployment
+## Sample Use Cases
 
-This project can be deployed using:
-
-- Render
-- Railway
-- Replit
+* Invoice Information Extraction
+* Purchase Order Analysis
+* Financial Document Processing
+* Scanned PDF Digitization
+* Dynamic Keyword Search
+* AI-Based Document Understanding
 
 ---
 
-# Author
+## Future Improvements
+
+* Multi-language OCR support
+* Database integration
+* User authentication
+* Batch PDF processing
+* Frontend dashboard
+* Support for Word and Excel documents
+
+---
+
+## Author
+
+Bhabani Mishra
+
+Built as part of an AI-powered document processing and information extraction project using FastAPI, OCR, Docker, and Gemini AI.
 
 Bhabani Mishra
