@@ -2,7 +2,9 @@ import os
 import shutil
 import uuid
 import base64
-
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import HTMLResponse
 from dotenv import load_dotenv
 from fastapi.middleware.cors import CORSMiddleware
 
@@ -40,6 +42,15 @@ app = FastAPI(
     description="Upload PDFs and extract structured information using OCR and LLM",
     version="1.0.0"
 )
+app.mount(
+    "/static",
+    StaticFiles(directory="app/static"),
+    name="static"
+)
+
+templates = Jinja2Templates(
+    directory="app/templates"
+)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -65,11 +76,13 @@ class Base64PDFRequest(BaseModel):
 # ---------------------------------------------------
 # HOME ROUTE
 # ---------------------------------------------------
-@app.get("/")
-def home():
-    return {
-        "message": "PDF Extraction API is running successfully"
-    }
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):
+
+    return templates.TemplateResponse(
+        "index.html",
+        {"request": request}
+    )
 
 
 # ---------------------------------------------------

@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI PDF Information Extraction</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 
 <body>
@@ -19,19 +19,21 @@
 
         <div class="card">
 
-            <label>Upload PDF</label>
+            <label for="pdfFile">Upload PDF</label>
 
             <input
                 type="file"
                 id="pdfFile"
-                accept=".pdf">
+                accept=".pdf"
+                title="Upload a PDF file">
 
-            <label>Keyword (Optional)</label>
+            <label for="keyword">Keyword (Optional)</label>
 
             <input
                 type="text"
                 id="keyword"
-                placeholder="Enter keyword (optional)">
+                placeholder="Enter keyword (optional)"
+                title="Enter an optional keyword">
 
             <button onclick="extractData()">
                 Extract Information
@@ -59,7 +61,7 @@ Upload a PDF and click Extract Information
 
     </div>
 
-    <script src="script.js"></script>
+    <script src="/static/script.js"></script>
 
 </body>
 
