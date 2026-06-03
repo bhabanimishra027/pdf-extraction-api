@@ -80,10 +80,9 @@ class Base64PDFRequest(BaseModel):
 async def home(request: Request):
 
     return templates.TemplateResponse(
-        "index.html",
-        {"request": request}
+        request=request,
+        name="index.html"
     )
-
 
 # ---------------------------------------------------
 # FORM-DATA PDF UPLOAD
