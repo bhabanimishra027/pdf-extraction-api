@@ -1,4 +1,4 @@
-async function extractData(){
+async function extractData() {
 
     const fileInput =
         document.getElementById("pdfFile");
@@ -6,15 +6,17 @@ async function extractData(){
     const keyword =
         document.getElementById("keyword").value;
 
-    if(fileInput.files.length === 0){
+    const responseBox =
+        document.getElementById("responseBox");
 
-        alert("Please select a PDF");
+    if (fileInput.files.length === 0) {
+
+        alert("Please select a PDF file");
 
         return;
     }
 
-    const formData =
-        new FormData();
+    const formData = new FormData();
 
     formData.append(
         "file",
@@ -26,22 +28,26 @@ async function extractData(){
         keyword
     );
 
-    const responseBox =
-        document.getElementById("responseBox");
-
     responseBox.textContent =
-        "Processing...";
+        "Processing PDF...";
 
-    try{
+    try {
 
         const response =
             await fetch(
                 "https://pdf-extraction-api-o2h7.onrender.com/parse-pdf",
                 {
-                    method:"POST",
-                    body:formData
+                    method: "POST",
+                    body: formData
                 }
             );
+
+        if (!response.ok) {
+
+            throw new Error(
+                `HTTP Error ${response.status}`
+            );
+        }
 
         const data =
             await response.json();
@@ -52,22 +58,28 @@ async function extractData(){
                 null,
                 4
             );
+
     }
 
-    catch(error){
+    catch (error) {
+
+        console.error(error);
 
         responseBox.textContent =
             "Error: " + error.message;
     }
 }
 
-function copyJson(){
+function copyJson() {
 
-    navigator.clipboard.writeText(
+    const content =
         document.getElementById(
             "responseBox"
-        ).textContent
+        ).textContent;
+
+    navigator.clipboard.writeText(
+        content
     );
 
-    alert("JSON copied");
+    alert("JSON copied successfully");
 }

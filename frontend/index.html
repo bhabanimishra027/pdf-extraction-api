@@ -1,66 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI PDF Information Extraction</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="container">
+    <div class="container">
 
-    <h1>📄 AI PDF Information Extraction</h1>
+        <div class="hero">
+            <h1>📄 AI PDF Information Extraction</h1>
+            <p>Upload a PDF and extract structured information instantly.</p>
+        </div>
 
-    <p>
-        Upload a PDF and extract structured information instantly.
-    </p>
+        <div class="card">
 
-    <div class="card">
+            <label>Upload PDF</label>
 
-        <label for="pdfFile">Upload PDF</label>
-        <input
-            type="file"
-            id="pdfFile"
-            accept=".pdf"
-            title="Upload a PDF file"
-        >
+            <input
+                type="file"
+                id="pdfFile"
+                accept=".pdf">
 
-        <label for="keyword">Keyword (optional)</label>
-        <input
-            type="text"
-            id="keyword"
-            placeholder="Enter keyword (optional)"
-            title="Enter a keyword to filter extraction"
-        >
+            <label>Keyword (Optional)</label>
 
-        <button onclick="extractData()">
-            Extract Information
-        </button>
+            <input
+                type="text"
+                id="keyword"
+                placeholder="Enter keyword (optional)">
 
-    </div>
-
-    <div class="output">
-
-        <div class="output-header">
-
-            <h2>JSON Output</h2>
-
-            <button onclick="copyJson()">
-                Copy
+            <button onclick="extractData()">
+                Extract Information
             </button>
 
         </div>
 
-        <pre id="responseBox">
+        <div class="output-card">
+
+            <div class="output-header">
+
+                <h2>JSON Output</h2>
+
+                <button onclick="copyJson()">
+                    Copy
+                </button>
+
+            </div>
+
+            <pre id="responseBox">
 Upload a PDF and click Extract Information
-        </pre>
+            </pre>
+
+        </div>
 
     </div>
 
-</div>
-
-<script src="script.js"></script>
+    <script src="script.js"></script>
 
 </body>
+
 </html>
