@@ -4,6 +4,7 @@ import uuid
 import base64
 
 from dotenv import load_dotenv
+from fastapi.middleware.cors import CORSMiddleware
 
 from fastapi import (
     FastAPI,
@@ -38,6 +39,13 @@ app = FastAPI(
     title="PDF Information Extraction API",
     description="Upload PDFs and extract structured information using OCR and LLM",
     version="1.0.0"
+)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 UPLOAD_DIR = "uploads"
