@@ -1,23 +1,24 @@
 async function extractData(){
 
-    const fileInput =
+    const file =
         document.getElementById("pdfFile");
 
     const keyword =
         document.getElementById("keyword").value;
 
-    if(fileInput.files.length === 0){
+    if(file.files.length === 0){
 
-        alert("Please select a PDF");
+        alert("Please upload a PDF");
 
         return;
     }
 
-    const formData = new FormData();
+    const formData =
+        new FormData();
 
     formData.append(
         "file",
-        fileInput.files[0]
+        file.files[0]
     );
 
     formData.append(
@@ -46,7 +47,9 @@ async function extractData(){
         );
 
         document
-            .getElementById("responseBox")
+            .getElementById(
+                "responseBox"
+            )
             .textContent =
             JSON.stringify(
                 data,
@@ -65,8 +68,9 @@ async function extractData(){
 function showDocumentInfo(data){
 
     document
-        .getElementById("documentInfo")
-        .innerHTML = `
+        .getElementById(
+            "documentInfo"
+        ).innerHTML = `
 
         <div class="doc-card">
 
@@ -74,13 +78,11 @@ function showDocumentInfo(data){
                 <h3>📄 ${data.filename}</h3>
             </div>
 
-            <div>
-                <strong>Type:</strong>
+            <div class="badge">
                 ${data.document_type}
             </div>
 
-            <div>
-                <strong>Status:</strong>
+            <div class="badge">
                 ${data.status}
             </div>
 
@@ -88,7 +90,7 @@ function showDocumentInfo(data){
     `;
 }
 
-function showAccordion(extractedData){
+function showAccordion(data){
 
     const container =
         document.getElementById(
@@ -97,7 +99,7 @@ function showAccordion(extractedData){
 
     container.innerHTML = "";
 
-    for(const key in extractedData){
+    for(const key in data){
 
         const button =
             document.createElement(
@@ -107,8 +109,8 @@ function showAccordion(extractedData){
         button.className =
             "accordion";
 
-        button.textContent =
-            key;
+        button.innerHTML =
+            `▶ ${key}`;
 
         const panel =
             document.createElement(
@@ -119,26 +121,18 @@ function showAccordion(extractedData){
             "panel";
 
         panel.innerHTML =
-            `<p>${extractedData[key]}</p>`;
+            `<p>${data[key]}</p>`;
 
         button.onclick =
-            function(){
+            () => {
 
-                if(
-                    panel.style.display
-                    ===
-                    "block"
-                ){
-
-                    panel.style.display =
-                    "none";
-                }
-
-                else{
-
-                    panel.style.display =
-                    "block";
-                }
+                panel.style.display =
+                panel.style.display ===
+                "block"
+                ?
+                "none"
+                :
+                "block";
             };
 
         container.appendChild(
@@ -153,24 +147,16 @@ function showAccordion(extractedData){
 
 function toggleJson(){
 
-    const jsonBox =
+    const box =
         document.getElementById(
             "responseBox"
         );
 
-    if(
-        jsonBox.style.display
-        ===
+    box.style.display =
+        box.style.display ===
         "block"
-    ){
-
-        jsonBox.style.display =
-        "none";
-    }
-
-    else{
-
-        jsonBox.style.display =
+        ?
+        "none"
+        :
         "block";
-    }
 }
