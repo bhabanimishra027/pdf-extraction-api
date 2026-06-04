@@ -83,3 +83,31 @@ function copyJson() {
 
     alert("JSON copied successfully");
 }
+
+function downloadJson() {
+    const content = document.getElementById("responseBox").textContent;
+    
+    // Check if the content is the default placeholder or an error
+    if (content.trim() === "Upload a PDF and click Extract Information" || content.includes("Processing PDF...") || content.startsWith("Error:")) {
+        alert("No valid JSON data to download.");
+        return;
+    }
+
+    try {
+        const blob = new Blob([content], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "extracted_data.json";
+        
+        document.body.appendChild(a);
+        a.click();
+        
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    } catch (error) {
+        console.error("Error creating download:", error);
+        alert("Failed to download JSON.");
+    }
+}
