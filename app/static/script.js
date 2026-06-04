@@ -1,4 +1,4 @@
-async function extractData() {
+async function extractData(){
 
     const fileInput =
         document.getElementById("pdfFile");
@@ -6,12 +6,9 @@ async function extractData() {
     const keyword =
         document.getElementById("keyword").value;
 
-    const responseBox =
-        document.getElementById("responseBox");
+    if(fileInput.files.length === 0){
 
-    if (fileInput.files.length === 0) {
-
-        alert("Please select a PDF file");
+        alert("Please select a PDF");
 
         return;
     }
@@ -28,31 +25,29 @@ async function extractData() {
         keyword
     );
 
-    responseBox.textContent =
-        "Processing PDF...";
-
-    try {
+    try{
 
         const response =
             await fetch(
-                "https://pdf-extraction-api-o2h7.onrender.com/parse-pdf",
+                "/parse-pdf",
                 {
-                    method: "POST",
-                    body: formData
+                    method:"POST",
+                    body:formData
                 }
             );
-
-        if (!response.ok) {
-
-            throw new Error(
-                `HTTP Error ${response.status}`
-            );
-        }
 
         const data =
             await response.json();
 
-        responseBox.textContent =
+        showDocumentInfo(data);
+
+        showAccordion(
+            data.extracted_data
+        );
+
+        document
+            .getElementById("responseBox")
+            .textContent =
             JSON.stringify(
                 data,
                 null,
@@ -61,25 +56,121 @@ async function extractData() {
 
     }
 
-    catch (error) {
+    catch(error){
 
-        console.error(error);
-
-        responseBox.textContent =
-            "Error: " + error.message;
+        alert(error.message);
     }
 }
 
-function copyJson() {
+function showDocumentInfo(data){
 
-    const content =
+    document
+        .getElementById("documentInfo")
+        .innerHTML = `
+
+        <div class="doc-card">
+
+            <div>
+                <h3>📄 ${data.filename}</h3>
+            </div>
+
+            <div>
+                <strong>Type:</strong>
+                ${data.document_type}
+            </div>
+
+            <div>
+                <strong>Status:</strong>
+                ${data.status}
+            </div>
+
+        </div>
+    `;
+}
+
+function showAccordion(extractedData){
+
+    const container =
+        document.getElementById(
+            "accordionContainer"
+        );
+
+    container.innerHTML = "";
+
+    for(const key in extractedData){
+
+        const button =
+            document.createElement(
+                "button"
+            );
+
+        button.className =
+            "accordion";
+
+        button.textContent =
+            key;
+
+        const panel =
+            document.createElement(
+                "div"
+            );
+
+        panel.className =
+            "panel";
+
+        panel.innerHTML =
+            `<p>${extractedData[key]}</p>`;
+
+        button.onclick =
+            function(){
+
+                if(
+                    panel.style.display
+                    ===
+                    "block"
+                ){
+
+                    panel.style.display =
+                    "none";
+                }
+
+                else{
+
+                    panel.style.display =
+                    "block";
+                }
+            };
+
+        container.appendChild(
+            button
+        );
+
+        container.appendChild(
+            panel
+        );
+    }
+}
+
+function toggleJson(){
+
+    const jsonBox =
         document.getElementById(
             "responseBox"
-        ).textContent;
+        );
 
-    navigator.clipboard.writeText(
-        content
-    );
+    if(
+        jsonBox.style.display
+        ===
+        "block"
+    ){
 
-    alert("JSON copied successfully");
+        jsonBox.style.display =
+        "none";
+    }
+
+    else{
+
+        jsonBox.style.display =
+        "block";
+    }
 }

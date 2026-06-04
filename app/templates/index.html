@@ -10,58 +10,55 @@
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <div class="hero">
-            <h1>📄 AI PDF Information Extraction</h1>
-            <p>Upload a PDF and extract structured information instantly.</p>
-        </div>
+    <h1>📄 AI PDF Information Extraction</h1>
 
-        <div class="card">
+    <p class="subtitle">
+        Upload a PDF and extract structured information instantly.
+    </p>
 
-            <label for="pdfFile">Upload PDF</label>
+    <div class="upload-card">
 
-            <input
-                type="file"
-                id="pdfFile"
-                accept=".pdf"
-                title="Upload a PDF file">
+        <input
+            type="file"
+            id="pdfFile"
+            accept=".pdf">
 
-            <label for="keyword">Keyword (Optional)</label>
+        <input
+            type="text"
+            id="keyword"
+            placeholder="Enter keyword (optional)">
 
-            <input
-                type="text"
-                id="keyword"
-                placeholder="Enter keyword (optional)"
-                title="Enter an optional keyword">
-
-            <button onclick="extractData()">
-                Extract Information
-            </button>
-
-        </div>
-
-        <div class="output-card">
-
-            <div class="output-header">
-
-                <h2>JSON Output</h2>
-
-                <button onclick="copyJson()">
-                    Copy
-                </button>
-
-            </div>
-
-            <pre id="responseBox">
-Upload a PDF and click Extract Information
-            </pre>
-
-        </div>
+        <button onclick="extractData()">
+            Extract Information
+        </button>
 
     </div>
 
-    <script src="/static/script.js"></script>
+    <div id="documentInfo"></div>
+
+    <div class="info-card">
+
+        <h2>Important Information</h2>
+
+        <div id="accordionContainer"></div>
+
+    </div>
+
+    <div class="json-card">
+
+        <button onclick="toggleJson()">
+            Show / Hide Raw JSON
+        </button>
+
+        <pre id="responseBox"></pre>
+
+    </div>
+
+</div>
+
+<script src="/static/script.js"></script>
 
 </body>
 

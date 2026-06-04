@@ -1,10 +1,5 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
+    margin:0;
     font-family:Arial,sans-serif;
     background:#f4f7fb;
     padding:40px;
@@ -15,84 +10,80 @@ body{
     margin:auto;
 }
 
-.hero{
+h1{
     text-align:center;
-    margin-bottom:30px;
 }
 
-.hero h1{
-    font-size:42px;
-    color:#0f172a;
-    margin-bottom:10px;
+.subtitle{
+    text-align:center;
+    color:#666;
 }
 
-.hero p{
-    color:#64748b;
-}
-
-.card{
+.upload-card,
+.info-card,
+.json-card,
+.doc-card{
     background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-    margin-bottom:20px;
+    padding:20px;
+    margin-top:20px;
+    border-radius:15px;
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
 }
 
-label{
-    display:block;
-    margin-bottom:10px;
-    font-weight:bold;
-}
-
-input[type="file"],
-input[type="text"]{
+input{
     width:100%;
     padding:12px;
-    margin-bottom:20px;
-    border:1px solid #cbd5e1;
-    border-radius:10px;
+    margin-bottom:15px;
+    border:1px solid #ddd;
+    border-radius:8px;
+    box-sizing:border-box;
 }
 
 button{
     width:100%;
-    padding:14px;
+    padding:12px;
     background:#0ea5e9;
     color:white;
     border:none;
-    border-radius:10px;
+    border-radius:8px;
     cursor:pointer;
-    font-size:16px;
 }
 
 button:hover{
     background:#0284c7;
 }
 
-.output-card{
+.accordion{
+    background:#eaf6ff;
+    cursor:pointer;
+    padding:15px;
+    width:100%;
+    border:none;
+    text-align:left;
+    margin-top:10px;
+    border-radius:8px;
+    font-weight:bold;
+}
+
+.panel{
+    display:none;
     background:white;
-    padding:30px;
-    border-radius:20px;
-    box-shadow:0 5px 20px rgba(0,0,0,0.08);
-}
-
-.output-header{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:20px;
-}
-
-.output-header button{
-    width:auto;
-    padding:10px 20px;
+    padding:15px;
+    border:1px solid #ddd;
+    border-top:none;
 }
 
 pre{
+    display:none;
     background:#0f172a;
     color:#e2e8f0;
-    padding:20px;
-    border-radius:12px;
-    min-height:350px;
+    padding:15px;
+    border-radius:10px;
     overflow:auto;
-    white-space:pre-wrap;
+}
+
+.doc-card{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }

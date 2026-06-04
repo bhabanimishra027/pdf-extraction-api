@@ -1,13 +1,13 @@
 import base64
 import json
 
-with open("uploads/AADHAR CARD.pdf", "rb") as pdf_file:
+with open("uploads/RECIEPT.pdf", "rb") as pdf_file:
     encoded = base64.b64encode(
         pdf_file.read()
     ).decode()
 
 data = {
-    "filename": "AADHAR CARD.pdf",
+    "filename": "RECIEPT.pdf",
     "pdf_data": encoded,
     "keyword": "amount"
 }
