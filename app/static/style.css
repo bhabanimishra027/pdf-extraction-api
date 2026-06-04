@@ -1,232 +1,98 @@
-body{
+*{
     margin:0;
-    font-family:'Segoe UI',sans-serif;
-    background:#f5f7fb;
-    color:#0f172a;
+    padding:0;
+    box-sizing:border-box;
 }
 
-.hero{
-
-    background:linear-gradient(
-        135deg,
-        #2563eb,
-        #7c3aed
-    );
-
-    color:white;
-
-    text-align:center;
-
-    padding:90px 20px;
-}
-
-.hero h1{
-    font-size:3.2rem;
-    margin-bottom:15px;
-}
-
-.hero p{
-    font-size:1.2rem;
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    padding:40px;
 }
 
 .container{
-
     max-width:1000px;
-
-    margin:-50px auto 50px;
-
-    padding:20px;
+    margin:auto;
 }
 
-.upload-box{
-
-    background:white;
-
-    border-radius:25px;
-
-    padding:60px;
-
+.hero{
     text-align:center;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.08);
-
     margin-bottom:30px;
-
-    border:3px dashed #cbd5e1;
 }
 
-.upload-icon{
+.hero h1{
+    font-size:42px;
+    color:#0f172a;
+    margin-bottom:10px;
+}
 
-    font-size:4rem;
+.hero p{
+    color:#64748b;
+}
 
+.card{
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
     margin-bottom:20px;
 }
 
-.upload-box input{
-
-    margin-top:20px;
-}
-
-.keyword-card,
-.accordion-card,
-.json-card,
-.doc-card{
-
-    background:white;
-
-    border-radius:20px;
-
-    padding:25px;
-
-    margin-bottom:25px;
-
-    box-shadow:
-        0 10px 30px rgba(0,0,0,.08);
-}
-
-.keyword-card label{
-
+label{
     display:block;
-
-    margin-bottom:12px;
-
-    font-weight:600;
+    margin-bottom:10px;
+    font-weight:bold;
 }
 
-.keyword-card input{
-
+input[type="file"],
+input[type="text"]{
     width:100%;
+    padding:12px;
+    margin-bottom:20px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+}
 
+button{
+    width:100%;
     padding:14px;
-
-    border:1px solid #dbeafe;
-
-    border-radius:12px;
-}
-
-.extract-btn{
-
-    width:100%;
-
-    padding:18px;
-
-    border:none;
-
-    border-radius:15px;
-
-    background:#2563eb;
-
+    background:#0ea5e9;
     color:white;
-
-    font-size:18px;
-
-    font-weight:600;
-
-    cursor:pointer;
-
-    margin-bottom:30px;
-}
-
-.extract-btn:hover{
-
-    background:#1d4ed8;
-}
-
-.doc-card{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    flex-wrap:wrap;
-}
-
-.badge{
-
-    background:#dbeafe;
-
-    color:#1d4ed8;
-
-    padding:10px 18px;
-
-    border-radius:30px;
-
-    font-weight:600;
-}
-
-.accordion{
-
-    width:100%;
-
-    background:#f8fafc;
-
     border:none;
-
-    padding:18px;
-
-    margin-top:12px;
-
-    border-radius:12px;
-
-    text-align:left;
-
+    border-radius:10px;
+    cursor:pointer;
     font-size:16px;
-
-    font-weight:600;
-
-    cursor:pointer;
 }
 
-.panel{
+button:hover{
+    background:#0284c7;
+}
 
-    display:none;
-
-    padding:20px;
-
+.output-card{
     background:white;
-
-    border:1px solid #e2e8f0;
-
-    border-top:none;
-
-    border-radius:0 0 12px 12px;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 5px 20px rgba(0,0,0,0.08);
 }
 
-.json-btn{
+.output-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:20px;
+}
 
-    width:100%;
-
-    padding:15px;
-
-    border:none;
-
-    border-radius:12px;
-
-    background:#0f172a;
-
-    color:white;
-
-    cursor:pointer;
+.output-header button{
+    width:auto;
+    padding:10px 20px;
 }
 
 pre{
-
-    display:none;
-
-    margin-top:20px;
-
     background:#0f172a;
-
     color:#e2e8f0;
-
     padding:20px;
-
     border-radius:12px;
-
+    min-height:350px;
     overflow:auto;
-
-    max-height:500px;
+    white-space:pre-wrap;
 }

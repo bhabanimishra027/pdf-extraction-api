@@ -1,84 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI PDF Information Extraction</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
 <body>
-
-    <section class="hero">
-
-        <h1>📄 AI PDF Information Extraction</h1>
-
-        <p>
-            Upload, Analyze & Extract Data Using AI
-        </p>
-
-    </section>
 
     <div class="container">
 
-        <div class="upload-box">
+        <div class="hero">
+            <h1>📄 AI PDF Information Extraction</h1>
+            <p>Upload a PDF and extract structured information instantly.</p>
+        </div>
 
-            <div class="upload-icon">
-                ☁️
-            </div>
+        <div class="card">
 
-            <h2>Drag & Drop PDF Here</h2>
-
-            <p>or Browse File</p>
+            <label for="pdfFile">Upload PDF</label>
 
             <input
                 type="file"
                 id="pdfFile"
-                accept=".pdf">
+                accept=".pdf"
+                title="Upload a PDF file">
 
-        </div>
-
-        <div class="keyword-card">
-
-            <label>
-                Keyword
-            </label>
+            <label for="keyword">Keyword (Optional)</label>
 
             <input
                 type="text"
                 id="keyword"
-                placeholder="Enter keyword (optional)">
+                placeholder="Enter keyword (optional)"
+                title="Enter an optional keyword">
 
-        </div>
-
-        <button
-            class="extract-btn"
-            onclick="extractData()">
-
-            Extract Information
-
-        </button>
-
-        <div id="documentInfo"></div>
-
-        <div class="accordion-card">
-
-            <h2>
-                Important Information
-            </h2>
-
-            <div id="accordionContainer"></div>
-
-        </div>
-
-        <div class="json-card">
-
-            <button
-                class="json-btn"
-                onclick="toggleJson()">
-
-                View Raw JSON
-
+            <button onclick="extractData()">
+                Extract Information
             </button>
 
-            <pre id="responseBox"></pre>
+        </div>
+
+        <div class="output-card">
+
+            <div class="output-header">
+
+                <h2>JSON Output</h2>
+
+                <button onclick="copyJson()">
+                    Copy
+                </button>
+
+            </div>
+
+            <pre id="responseBox">
+Upload a PDF and click Extract Information
+            </pre>
 
         </div>
 
     </div>
 
-<script src="/static/script.js"></script>
+    <script src="/static/script.js"></script>
 
 </body>
+
 </html>
