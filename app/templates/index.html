@@ -1,84 +1,68 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI PDF Information Extraction</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/static/style.css">
 </head>
+
 <body>
-    <div class="app-container">
-        <!-- Header -->
-        <header class="header">
-            <div class="logo">📄 AI PDF Information Extraction</div>
-            <p class="subtitle">Upload, Analyze & Extract Data Using AI</p>
-        </header>
 
-        <main class="main-content">
-            <!-- Upload Section -->
-            <section class="upload-section" id="uploadSection">
-                <div class="drop-zone" id="dropZone">
-                    <div class="drop-zone-content">
-                        <div class="icon">☁️</div>
-                        <h3>Drag & Drop PDF Here</h3>
-                        <p>or</p>
-                        <label for="pdfFile" class="browse-btn">Browse File</label>
-                        <input type="file" id="pdfFile" accept=".pdf" hidden>
-                    </div>
-                    <div class="file-info hidden" id="fileInfo">
-                        <div class="file-icon">📄</div>
-                        <div class="file-details">
-                            <h4 id="fileName">No file selected</h4>
-                            <p id="fileStatus">Ready to extract</p>
-                        </div>
-                        <button id="removeFileBtn" class="icon-btn" title="Remove File">✕</button>
-                    </div>
-                </div>
+    <div class="container">
 
-                <div class="input-group">
-                    <label for="keyword">Keyword</label>
-                    <input type="text" id="keyword" placeholder="[ amount________________________ ]">
-                </div>
+        <div class="hero">
+            <h1>📄 AI PDF Information Extraction</h1>
+            <p>Upload a PDF and extract structured information instantly.</p>
+        </div>
 
-                <button class="primary-btn" id="extractBtn" onclick="extractData()">
-                    <span class="btn-text">Extract Information</span>
-                    <span class="loader hidden" id="btnLoader"></span>
+        <div class="card">
+
+            <label for="pdfFile">Upload PDF</label>
+
+            <input
+                type="file"
+                id="pdfFile"
+                accept=".pdf"
+                title="Upload a PDF file">
+
+            <label for="keyword">Keyword (Optional)</label>
+
+            <input
+                type="text"
+                id="keyword"
+                placeholder="Enter keyword (optional)"
+                title="Enter an optional keyword">
+
+            <button onclick="extractData()">
+                Extract Information
+            </button>
+
+        </div>
+
+        <div class="output-card">
+
+            <div class="output-header">
+
+                <h2>JSON Output</h2>
+
+                <button onclick="copyJson()">
+                    Copy
                 </button>
-            </section>
 
-            <!-- Results Section -->
-            <section class="results-section hidden" id="resultsSection">
-                <div class="result-card file-success-card">
-                    <div class="file-icon">📄</div>
-                    <div class="file-details">
-                        <h4 id="resultFileName" style="text-transform: uppercase;">PDF NAME</h4>
-                        <p class="success-text">Text PDF • Success</p>
-                    </div>
-                </div>
+            </div>
 
-                <div class="result-card info-card">
-                    <h3>Important Information</h3>
-                    <div class="accordion-container" id="extractedDataContainer">
-                        <!-- Accordion items will be injected here -->
-                    </div>
-                </div>
+            <pre id="responseBox">
+Upload a PDF and click Extract Information
+            </pre>
 
-                <button class="secondary-btn" onclick="toggleRawJson()">Show Raw JSON</button>
+        </div>
 
-                <div class="raw-json-container hidden" id="rawJsonContainer">
-                    <div class="json-header">
-                        <span>JSON Output</span>
-                        <button class="copy-btn" onclick="copyJson()">Copy</button>
-                    </div>
-                    <pre id="responseBox"></pre>
-                </div>
-            </section>
-        </main>
     </div>
 
     <script src="/static/script.js"></script>
+
 </body>
+
 </html>
