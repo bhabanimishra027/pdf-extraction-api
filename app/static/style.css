@@ -1,22 +1,13 @@
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
 body{
-
+    margin:0;
     font-family:'Segoe UI',sans-serif;
-
-    background:#f4f7fc;
-
+    background:#f5f7fb;
     color:#0f172a;
 }
 
 .hero{
 
-    background:
-    linear-gradient(
+    background:linear-gradient(
         135deg,
         #2563eb,
         #7c3aed
@@ -26,33 +17,58 @@ body{
 
     text-align:center;
 
-    padding:80px 20px;
+    padding:90px 20px;
 }
 
 .hero h1{
-
-    font-size:3rem;
-
+    font-size:3.2rem;
     margin-bottom:15px;
 }
 
 .hero p{
-
-    font-size:1.1rem;
-
-    opacity:.9;
+    font-size:1.2rem;
 }
 
 .container{
 
-    max-width:1100px;
+    max-width:1000px;
 
-    margin:-40px auto 40px;
+    margin:-50px auto 50px;
 
     padding:20px;
 }
 
-.upload-card,
+.upload-box{
+
+    background:white;
+
+    border-radius:25px;
+
+    padding:60px;
+
+    text-align:center;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.08);
+
+    margin-bottom:30px;
+
+    border:3px dashed #cbd5e1;
+}
+
+.upload-icon{
+
+    font-size:4rem;
+
+    margin-bottom:20px;
+}
+
+.upload-box input{
+
+    margin-top:20px;
+}
+
+.keyword-card,
 .accordion-card,
 .json-card,
 .doc-card{
@@ -66,16 +82,19 @@ body{
     margin-bottom:25px;
 
     box-shadow:
-        0 10px 25px rgba(0,0,0,.08);
+        0 10px 30px rgba(0,0,0,.08);
 }
 
-.upload-card h2,
-.accordion-card h2{
+.keyword-card label{
 
-    margin-bottom:20px;
+    display:block;
+
+    margin-bottom:12px;
+
+    font-weight:600;
 }
 
-input{
+.keyword-card input{
 
     width:100%;
 
@@ -84,38 +103,34 @@ input{
     border:1px solid #dbeafe;
 
     border-radius:12px;
-
-    margin-bottom:15px;
-
-    font-size:15px;
 }
 
-button{
+.extract-btn{
 
     width:100%;
 
-    padding:15px;
+    padding:18px;
 
     border:none;
 
-    border-radius:12px;
+    border-radius:15px;
 
     background:#2563eb;
 
     color:white;
 
-    font-size:16px;
+    font-size:18px;
+
+    font-weight:600;
 
     cursor:pointer;
 
-    transition:.3s;
+    margin-bottom:30px;
 }
 
-button:hover{
+.extract-btn:hover{
 
     background:#1d4ed8;
-
-    transform:translateY(-2px);
 }
 
 .doc-card{
@@ -127,38 +142,38 @@ button:hover{
     align-items:center;
 
     flex-wrap:wrap;
-
-    gap:15px;
 }
 
 .badge{
 
-    padding:8px 15px;
-
-    border-radius:50px;
-
-    font-size:14px;
-
     background:#dbeafe;
 
     color:#1d4ed8;
+
+    padding:10px 18px;
+
+    border-radius:30px;
+
+    font-weight:600;
 }
 
 .accordion{
 
     width:100%;
 
-    background:#eef4ff;
+    background:#f8fafc;
 
     border:none;
 
-    padding:15px;
+    padding:18px;
+
+    margin-top:12px;
 
     border-radius:12px;
 
     text-align:left;
 
-    margin-top:10px;
+    font-size:16px;
 
     font-weight:600;
 
@@ -169,23 +184,39 @@ button:hover{
 
     display:none;
 
+    padding:20px;
+
     background:white;
 
     border:1px solid #e2e8f0;
 
-    border-radius:0 0 12px 12px;
+    border-top:none;
 
-    padding:15px;
+    border-radius:0 0 12px 12px;
 }
 
 .json-btn{
 
-    margin-bottom:15px;
+    width:100%;
+
+    padding:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#0f172a;
+
+    color:white;
+
+    cursor:pointer;
 }
 
 pre{
 
     display:none;
+
+    margin-top:20px;
 
     background:#0f172a;
 

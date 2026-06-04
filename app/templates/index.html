@@ -1,60 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AI PDF Information Extraction</title>
-
-    <link rel="stylesheet" href="/static/style.css">
-
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-</head>
-
 <body>
 
-    <div class="hero">
+    <section class="hero">
 
         <h1>📄 AI PDF Information Extraction</h1>
 
         <p>
-            Upload a PDF and instantly extract structured information using AI.
+            Upload, Analyze & Extract Data Using AI
         </p>
 
-    </div>
+    </section>
 
     <div class="container">
 
-        <div class="upload-card">
+        <div class="upload-box">
 
-            <h2>
-                <i class="fa-solid fa-cloud-arrow-up"></i>
-                Upload Document
-            </h2>
+            <div class="upload-icon">
+                ☁️
+            </div>
+
+            <h2>Drag & Drop PDF Here</h2>
+
+            <p>or Browse File</p>
 
             <input
                 type="file"
                 id="pdfFile"
                 accept=".pdf">
 
+        </div>
+
+        <div class="keyword-card">
+
+            <label>
+                Keyword
+            </label>
+
             <input
                 type="text"
                 id="keyword"
-                placeholder="Keyword (optional)">
-
-            <button onclick="extractData()">
-                Extract Information
-            </button>
+                placeholder="Enter keyword (optional)">
 
         </div>
+
+        <button
+            class="extract-btn"
+            onclick="extractData()">
+
+            Extract Information
+
+        </button>
 
         <div id="documentInfo"></div>
 
         <div class="accordion-card">
 
             <h2>
-                <i class="fa-solid fa-circle-info"></i>
                 Important Information
             </h2>
 
@@ -78,8 +78,7 @@
 
     </div>
 
-    <script src="/static/script.js"></script>
+<script src="/static/script.js"></script>
 
 </body>
-
 </html>

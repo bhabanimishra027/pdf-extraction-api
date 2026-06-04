@@ -1,4 +1,4 @@
-async function extractData(){
+async function extractData() {
 
     const file =
         document.getElementById("pdfFile");
@@ -6,15 +6,14 @@ async function extractData(){
     const keyword =
         document.getElementById("keyword").value;
 
-    if(file.files.length === 0){
+    if (file.files.length === 0) {
 
         alert("Please upload a PDF");
 
         return;
     }
 
-    const formData =
-        new FormData();
+    const formData = new FormData();
 
     formData.append(
         "file",
@@ -26,14 +25,19 @@ async function extractData(){
         keyword
     );
 
-    try{
+    document.getElementById(
+        "accordionContainer"
+    ).innerHTML =
+        "<p>⏳ Processing PDF...</p>";
+
+    try {
 
         const response =
             await fetch(
                 "/parse-pdf",
                 {
-                    method:"POST",
-                    body:formData
+                    method: "POST",
+                    body: formData
                 }
             );
 
@@ -46,11 +50,9 @@ async function extractData(){
             data.extracted_data
         );
 
-        document
-            .getElementById(
-                "responseBox"
-            )
-            .textContent =
+        document.getElementById(
+            "responseBox"
+        ).textContent =
             JSON.stringify(
                 data,
                 null,
@@ -59,38 +61,43 @@ async function extractData(){
 
     }
 
-    catch(error){
+    catch (error) {
 
-        alert(error.message);
+        alert(
+            "Error: " +
+            error.message
+        );
     }
 }
 
-function showDocumentInfo(data){
 
-    document
-        .getElementById(
-            "documentInfo"
-        ).innerHTML = `
+function showDocumentInfo(data) {
 
-        <div class="doc-card">
+    document.getElementById(
+        "documentInfo"
+    ).innerHTML = `
 
-            <div>
-                <h3>📄 ${data.filename}</h3>
-            </div>
+    <div class="doc-card">
 
-            <div class="badge">
-                ${data.document_type}
-            </div>
-
-            <div class="badge">
-                ${data.status}
-            </div>
-
+        <div>
+            <h3>📄 ${data.filename}</h3>
         </div>
+
+        <div class="badge">
+            ${data.document_type}
+        </div>
+
+        <div class="badge">
+            ${data.status}
+        </div>
+
+    </div>
+
     `;
 }
 
-function showAccordion(data){
+
+function showAccordion(data) {
 
     const container =
         document.getElementById(
@@ -99,7 +106,7 @@ function showAccordion(data){
 
     container.innerHTML = "";
 
-    for(const key in data){
+    for (const key in data) {
 
         const button =
             document.createElement(
@@ -123,17 +130,56 @@ function showAccordion(data){
         panel.innerHTML =
             `<p>${data[key]}</p>`;
 
-        button.onclick =
+        button.addEventListener(
+            "click",
             () => {
 
-                panel.style.display =
-                panel.style.display ===
-                "block"
-                ?
-                "none"
-                :
-                "block";
-            };
+                const isOpen =
+                    panel.style.display ===
+                    "block";
+
+                const allPanels =
+                    document.querySelectorAll(
+                        ".panel"
+                    );
+
+                const allButtons =
+                    document.querySelectorAll(
+                        ".accordion"
+                    );
+
+                allPanels.forEach(
+                    p => p.style.display =
+                    "none"
+                );
+
+                allButtons.forEach(
+                    b => {
+
+                        b.innerHTML =
+                        "▶ " +
+                        b.innerHTML
+                        .replace(
+                            "▼ ",
+                            ""
+                        )
+                        .replace(
+                            "▶ ",
+                            ""
+                        );
+                    }
+                );
+
+                if (!isOpen) {
+
+                    panel.style.display =
+                        "block";
+
+                    button.innerHTML =
+                        `▼ ${key}`;
+                }
+            }
+        );
 
         container.appendChild(
             button
@@ -145,18 +191,26 @@ function showAccordion(data){
     }
 }
 
-function toggleJson(){
+
+function toggleJson() {
 
     const box =
         document.getElementById(
             "responseBox"
         );
 
-    box.style.display =
+    if (
         box.style.display ===
         "block"
-        ?
-        "none"
-        :
-        "block";
+    ) {
+
+        box.style.display =
+            "none";
+    }
+
+    else {
+
+        box.style.display =
+            "block";
+    }
 }
